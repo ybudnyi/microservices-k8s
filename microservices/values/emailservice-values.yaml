@@ -1,0 +1,13 @@
+appName: emailservice
+replicaCount: 1
+image:
+  repository: gcr.io/google-samples/microservices-demo/emailservice
+  tag: v0.2.3
+containerPort: 8080
+serviceType: ClusterIP
+servicePort: 5000
+containerVars:
+- key: PORT
+  value: "8080"
+- key: DISABLE_PROFILER
+  value: "1"

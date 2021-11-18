@@ -1,0 +1,8 @@
+appName: redis-cart
+replicaCount: 1
+image:
+  repository: redis
+  tag: alpine
+containerPort: 6379
+serviceType: ClusterIP
+servicePort: 6379

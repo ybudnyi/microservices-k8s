@@ -1,0 +1,11 @@
+appName: productcatalogservice
+replicaCount: 1
+image:
+  repository: gcr.io/google-samples/microservices-demo/productcatalogservice
+  tag: v0.2.3
+containerPort: 3550
+serviceType: ClusterIP
+servicePort: 3550
+containerVars:
+- key: PORT
+  value: "3550"
