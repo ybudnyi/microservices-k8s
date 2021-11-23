@@ -1,0 +1,27 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+    name: main-rules
+    namespace: monitoring
+spec:
+    groups:
+    - name: main.rules
+      rules: 
+      - alert: HostHightCPULoad
+        expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[2m])) * 100) >= 50
+        for: 1m
+        labels:
+            severity: warning
+            namespace: monitoring
+        annotations:
+            description: "Hight CPU usage {{ $labels.instance }}."
+            summary: "CPU load more than 50%\n Value = {{ $value  }}\n."
+      - alert: K8sPodCrashLooping
+        expr: kube_pod_container_status_restarts_total > 0
+        for: 0m
+        labels:
+          severity: critical
+          namespace: monitoring
+        annotations:
+            description: "Pod {{ $labels.pod }} is crash\n Times = {{ $value }}\n"
+            summary: "Pod {{ $labels.pod }} on instance {{ value.instance }}"

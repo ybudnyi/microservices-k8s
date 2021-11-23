@@ -1,0 +1,14 @@
+grafana:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-production"
+    hosts:
+      - grafana.example.com
+    tls:
+      - secretName: grafana.example.com-tls
+        hosts:
+          - grafana.example.com
+  grafana.ini:
+    server:
+      root_url: https://grafana.example.com
